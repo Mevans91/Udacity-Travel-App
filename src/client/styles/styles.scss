@@ -1,13 +1,16 @@
+body{
+    background-color: aliceblue;
+}
 .row1{
     height: 85vh;
     width: 60vw;
-    border: 1px solid black;
+    // border: 1px solid black;
 }
 
 .row2{
     height: 85vh;
     width: 40vw;
-    border: 1px solid black;
+    // border: 1px solid black;
 }
 .column{
     display: flex;
@@ -40,8 +43,26 @@ footer{
 
 .container{
     border: 1px solid black;
+    box-shadow: 0px 3px 19px #00000041;
     height: 60vh;
     width: 30vw;
     margin-left: 25%;
     margin-top: 5%;
+    background-color: white;
+}
+
+.results{
+    border: 1px solid black;
+    box-shadow: 0px 3px 19px #00000041;
+    height: 60vh;
+    width: 55vh;
+    // margin-left: 12.5%;
+    margin-top: 17%;
+    background-color: white;
+}
+
+.inputs{
+    // border: 1px solid black;
+    width: 20vw;
+    margin-left: 5%;
 }

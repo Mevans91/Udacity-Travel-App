@@ -1,3 +1,5 @@
+let geoData = {};
+
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -26,36 +28,32 @@ app.listen(8081, function () {
     console.log('Example app listening on port 8081!');
 })
 
+app.get('/all', function(request, response){
+    response.send(projectData);
+});
+
 app.post('/getPic', function (req, res) {
-    const API_KEY = process.env.PIX_KEY;
-    const textUrl = req.body.textUrl;
-    const apiUrl = "https://pixabay.com/api/";
-    const params = `?key=${API_KEY}&q=`; //need to finish later with input
-    const fetchUrl = apiUrl + params;
+    const PIX_KEY = "20375948-3b9ccc2d78e6a17d1a7bb3c71";
+    const pixUrl = `https://pixabay.com/api/?key=${PIX_KEY}&q=${location}&image_type=photo`;
+    const location = document.getElementById('location').value;
+    const departure = document.getElementById('departure').value;
+    const returnDate = document.getElementById('returnDate').value;
 
-    console.log(fetchUrl);
+    console.log(pixUrl);
 
-    fetch(fetchUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/JSON",
-        }
-    }).then((response) => {
+    fetch(pixUrl)
+    .then((response) => {
         return response.json();
     }).then((data) => {
-        res.send({
-            score_tag: data.score_tag,
-            agreement: data.agreement,
-            subjectivity: data.subjectivity,
-            confidence: data.confidence,
-            irony: data.irony,
-        })
+        console.log(data)
+        // res.send({
+        //     picture: data.webformatUrl
+        // })
     });
 })
 
-app.post('/getWeather', function (req, res) {
+app.get('/getWeather', function (req, res) {
     const API_KEY = process.env.WEATHER_KEY;
-    const textUrl = req.body.textUrl;
     const apiUrl = "https://api.weatherbit.io/v2.0/history/daily";
     const params = `?key=${WEATHER_KEY}&q=`; //need to finish later with input
     const fetchUrl = apiUrl + params;
@@ -79,3 +77,21 @@ app.post('/getWeather', function (req, res) {
         })
     });
 })
+
+app.get('/addGeo', function(request, response){
+    response.send(geoData);
+});
+
+app.post('/getGeo', function(request, response) {
+    geoData = {
+        latitude: request.body.latitude,
+        longitude: request.body.longitude
+    }
+    console.log(geoData)
+})
+
+// app.post('/addPic', function(request, response) {
+//     projectData = {
+//       picture: request.body.webformatUrl
+//     }
+//   });

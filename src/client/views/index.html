@@ -15,17 +15,25 @@
             <div class="row1">
                 <h1>Travel Planner</h1>
                 <div class="container">
-                    <h4>Enter Destination</h4>
-                    <input type="text" id="location">
-                    <h4></h4>
-                    <input type="text" id="location">
-                    <h4>Enter Destination</h4>
-                    <input type="text" id="location">
-                    <button type="submit">Submit</button>
+                    <div class="inputs">
+                        <h4>Enter Destination</h4>
+                        <input type="text" id="location">
+                        <p id="latitude"></p>
+                        <p id="longitude"></p>
+                        <h4>Departure Date</h4>
+                        <input type="datetime-local" id="departure">
+                        <h4>Return Date</h4>
+                        <input type="datetime-local" id="returnDate">
+                        <button type="submit" id="submission">Submit</button>
+                    </div>
                 </div>
                 
             </div>
-            <div class="row2"></div>
+            <div class="row2">
+                <div class="results">
+                    <p id="destPic"></p>
+                </div>
+            </div>
         </div>
         <footer class="footer fixed-bottom">
             <div class="footer-row">
