@@ -1,16 +1,22 @@
-function getGeo(event) {
+function getInfo(event) {
+    getGeo();
+}
+
+async function getGeo() {
     const location = document.getElementById('location').value;
     const apiUrl = `http://api.geonames.org/searchJSON?q=${location}&maxRows=1&username=Mevans91`;
 
     console.log(location);
     getGeoData(apiUrl)
     .then(function(data) {
-        console.log(data);
         postData({
-            latitude: data.lat,
-            longitude: data.lng
+            latitude: data.geonames[0].lat,
+            longitude: data.geonames[0].lng
         });
-        updateUI();
+        getCoordinates()
+        .then(function(localData) {
+            callWeather(localData);
+        })
     });
 
 }
@@ -57,4 +63,33 @@ const updateUI = async (url = 'http://localhost:8081/addGeo') => {
     }
 };
 
-export { getGeo }
+const getCoordinates = async (url = 'http://localhost:8081/addGeo') => {
+    const response = await fetch(url);
+    try {
+        const localData = response.json();
+        return localData;
+    } catch (error) {
+        console.log('error from geoData endpoint', error);
+    }
+};
+
+const callWeather = async (localData) => {
+    const apiKey = process.env.WEATHER_KEY;
+    const startDate = document.getElementById('departure').value;
+    const endDate = document.getElementById('returnDate').value;
+    const lat = localData.latitude;
+    const long = localData.longitude;
+    const apiUrl = `https://api.weatherbit.io/v2.0/history/daily?lat=${lat}&lon=${long}&start_date=${startDate}&end_date=${endDate}&key=${apiKey}`;
+
+    console.log(apiUrl);
+    console.log(apiKey);
+    const response = await fetch(apiUrl);
+    try {
+        const newData = response.json();
+        console.log(newData)
+    } catch (error) {
+        console.log('error from Weatherbit', error);
+    }
+};
+
+export { getInfo }

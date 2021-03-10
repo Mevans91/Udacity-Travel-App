@@ -1,8 +1,8 @@
 function getPix(event) {
     event.preventDefault()
 
-    console.log("::: Form Submitted :::")
-    fetch('http://localhost:8080/getPic', {
+    console.log("getPix started")
+    fetch('http://localhost:8081/getPic', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

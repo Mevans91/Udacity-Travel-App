@@ -1,10 +1,8 @@
 import "./styles/styles.scss";
-import { getPix } from './js/getPix';
-import { getGeo } from './js/getGeo';
+import { getInfo } from './js/app';
 
 export {
-    getPix,
-    getGeo 
+    getInfo
 }
 
-document.getElementById('submission').addEventListener('click', getGeo);
+document.getElementById('submission').addEventListener('click', getInfo);

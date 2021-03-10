@@ -53,9 +53,9 @@ app.post('/getPic', function (req, res) {
 })
 
 app.get('/getWeather', function (req, res) {
-    const API_KEY = process.env.WEATHER_KEY;
+    const weatherKey = process.env.WEATHER_KEY;
     const apiUrl = "https://api.weatherbit.io/v2.0/history/daily";
-    const params = `?key=${WEATHER_KEY}&q=`; //need to finish later with input
+    const params = `?key=${weatherKey}&q=`; //need to finish later with input
     const fetchUrl = apiUrl + params;
 
     console.log(fetchUrl);
@@ -86,8 +86,9 @@ app.post('/getGeo', function(request, response) {
     geoData = {
         latitude: request.body.latitude,
         longitude: request.body.longitude
-    }
-    console.log(geoData)
+    };
+    const apiKey = process.env.WEATHER_KEY;
+    console.log(apiKey);
 })
 
 // app.post('/addPic', function(request, response) {
