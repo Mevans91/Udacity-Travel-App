@@ -1,3 +1,5 @@
+
+
 function getInfo(event) {
     getGeo();
 }
@@ -73,23 +75,34 @@ const getCoordinates = async (url = 'http://localhost:8081/addGeo') => {
     }
 };
 
+const getWeatherKey = async (url = 'http://localhost:8081/getKeys') => {
+    const res = await fetch(url);
+    try {
+        const keyData = res.json()
+        return keyData;
+    } catch (error) {
+        console.log('key error', error)
+    }
+}
+
 const callWeather = async (localData) => {
-    const apiKey = process.env.WEATHER_KEY;
     const startDate = document.getElementById('departure').value;
     const endDate = document.getElementById('returnDate').value;
     const lat = localData.latitude;
     const long = localData.longitude;
-    const apiUrl = `https://api.weatherbit.io/v2.0/history/daily?lat=${lat}&lon=${long}&start_date=${startDate}&end_date=${endDate}&key=${apiKey}`;
+    const key = await fetch('http://localhost:8081/getKeys');
+    const keyData = key.json();
 
-    console.log(apiUrl);
-    console.log(apiKey);
-    const response = await fetch(apiUrl);
-    try {
-        const newData = response.json();
-        console.log(newData)
-    } catch (error) {
-        console.log('error from Weatherbit', error);
-    }
+    const apiUrl = `https://api.weatherbit.io/v2.0/history/daily?lat=${lat}&lon=${long}&start_date=${startDate}&end_date=${endDate}&key=`;
+    
+    console.log(keyData)
+    // const response = await fetch(apiUrl);
+    // try {
+    //     const newData = response.json();
+    //     console.log(newData)
+    // } catch (error) {
+    //     console.log('error from Weatherbit', error);
+    // }
 };
 
 export { getInfo }

@@ -1,5 +1,3 @@
-let geoData = {};
-
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -18,6 +16,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 
+let geoData = {};
+let apiKeys = {
+    weatherKey: process.env.WEATHER_KEY,
+    pixKey: process.env.PIXABAY_KEY
+};
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
@@ -28,8 +31,9 @@ app.listen(8081, function () {
     console.log('Example app listening on port 8081!');
 })
 
-app.get('/all', function(request, response){
-    response.send(projectData);
+app.get('/getKeys', function(request, response){
+    response.send(apiKeys);
+    console.log(apiKeys);
 });
 
 app.post('/getPic', function (req, res) {
@@ -54,9 +58,11 @@ app.post('/getPic', function (req, res) {
 
 app.get('/getWeather', function (req, res) {
     const weatherKey = process.env.WEATHER_KEY;
-    const apiUrl = "https://api.weatherbit.io/v2.0/history/daily";
-    const params = `?key=${weatherKey}&q=`; //need to finish later with input
-    const fetchUrl = apiUrl + params;
+    const lat = geoData.latitude;
+    const long = geoData.longitude;
+    const startDate = document.getElementById('departure').value;
+    const endDate = document.getElementById('returnDate').value;
+    const fetchUrl = `https://api.weatherbit.io/v2.0/history/daily?lat=${lat}&lon=${long}&start_date=${startDate}&end_date=${endDate}&key=${weatherKey}`
 
     console.log(fetchUrl);
 
@@ -64,6 +70,7 @@ app.get('/getWeather', function (req, res) {
         method: "POST",
         headers: {
             "Content-Type": "application/JSON",
+            "Accept": "application/JSON"
         }
     }).then((response) => {
         return response.json();
@@ -87,8 +94,6 @@ app.post('/getGeo', function(request, response) {
         latitude: request.body.latitude,
         longitude: request.body.longitude
     };
-    const apiKey = process.env.WEATHER_KEY;
-    console.log(apiKey);
 })
 
 // app.post('/addPic', function(request, response) {
