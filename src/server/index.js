@@ -21,6 +21,8 @@ let apiKeys = {
     weatherKey: process.env.WEATHER_KEY,
     pixKey: process.env.PIXABAY_KEY
 };
+let weatherData = {};
+let pixData = {};
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
@@ -33,57 +35,7 @@ app.listen(8081, function () {
 
 app.get('/getKeys', function(request, response){
     response.send(apiKeys);
-    console.log(apiKeys);
 });
-
-app.post('/getPic', function (req, res) {
-    const PIX_KEY = "20375948-3b9ccc2d78e6a17d1a7bb3c71";
-    const pixUrl = `https://pixabay.com/api/?key=${PIX_KEY}&q=${location}&image_type=photo`;
-    const location = document.getElementById('location').value;
-    const departure = document.getElementById('departure').value;
-    const returnDate = document.getElementById('returnDate').value;
-
-    console.log(pixUrl);
-
-    fetch(pixUrl)
-    .then((response) => {
-        return response.json();
-    }).then((data) => {
-        console.log(data)
-        // res.send({
-        //     picture: data.webformatUrl
-        // })
-    });
-})
-
-app.get('/getWeather', function (req, res) {
-    const weatherKey = process.env.WEATHER_KEY;
-    const lat = geoData.latitude;
-    const long = geoData.longitude;
-    const startDate = document.getElementById('departure').value;
-    const endDate = document.getElementById('returnDate').value;
-    const fetchUrl = `https://api.weatherbit.io/v2.0/history/daily?lat=${lat}&lon=${long}&start_date=${startDate}&end_date=${endDate}&key=${weatherKey}`
-
-    console.log(fetchUrl);
-
-    fetch(fetchUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/JSON",
-            "Accept": "application/JSON"
-        }
-    }).then((response) => {
-        return response.json();
-    }).then((data) => {
-        res.send({
-            score_tag: data.score_tag,
-            agreement: data.agreement,
-            subjectivity: data.subjectivity,
-            confidence: data.confidence,
-            irony: data.irony,
-        })
-    });
-})
 
 app.get('/addGeo', function(request, response){
     response.send(geoData);
@@ -94,10 +46,38 @@ app.post('/getGeo', function(request, response) {
         latitude: request.body.latitude,
         longitude: request.body.longitude
     };
-})
+});
 
-// app.post('/addPic', function(request, response) {
-//     projectData = {
-//       picture: request.body.webformatUrl
-//     }
-//   });
+app.post('/saveWeather', function(request, response) {
+    weatherData = {
+        day1: request.body.day1,
+        day2: request.body.day2,
+        day3: request.body.day3,
+        day4: request.body.day4,
+        day5: request.body.day5,
+        day6: request.body.day6,
+        day7: request.body.day7,
+        day8: request.body.day8,
+        day9: request.body.day9,
+        day10: request.body.day10,
+        day11: request.body.day11,
+        day12: request.body.day12,
+        day13: request.body.day13,
+        day14: request.body.day14,
+    };
+});
+
+app.get('/getWeather', function (request, response) {
+    response.send(weatherData);
+});
+
+app.post('/savePic', function(request, response) {
+    pixData = {
+        picture: request.body.picture
+    };
+    console.log(pixData);
+});
+
+app.get('/getPic', function(request, response) {
+    response.send(pixData);
+});

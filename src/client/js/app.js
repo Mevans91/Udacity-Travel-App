@@ -1,10 +1,10 @@
 
 
 function getInfo(event) {
-    getGeo();
+    getData();
 }
 
-async function getGeo() {
+async function getData() {
     const location = document.getElementById('location').value;
     const apiUrl = `http://api.geonames.org/searchJSON?q=${location}&maxRows=1&username=Mevans91`;
 
@@ -17,11 +17,36 @@ async function getGeo() {
         });
         getCoordinates()
         .then(function(localData) {
-            callWeather(localData);
+            callWeather(localData)
+            .then(function(newData) {         
+                postWeather({
+                    day1: newData.data[1],
+                    day2: newData.data[2],
+                    day3: newData.data[3],
+                    day4: newData.data[4],
+                    day5: newData.data[5],
+                    day6: newData.data[6],
+                    day7: newData.data[7],
+                    day8: newData.data[8],
+                    day9: newData.data[9],
+                    day10: newData.data[10],
+                    day11: newData.data[11],
+                    day12: newData.data[12],
+                    day13: newData.data[13],
+                    day14: newData.data[14],
+                });
+                getPix(location)
+                .then(function(pixData) {
+                    console.log(pixData.hits[0])
+                    postPix({
+                        picture: pixData.hits[0]
+                    });
+                })
+            })
         })
     });
 
-}
+};
 
 async function getGeoData(apiUrl) {
     const response = await fetch(apiUrl);
@@ -75,34 +100,77 @@ const getCoordinates = async (url = 'http://localhost:8081/addGeo') => {
     }
 };
 
-const getWeatherKey = async (url = 'http://localhost:8081/getKeys') => {
-    const res = await fetch(url);
-    try {
-        const keyData = res.json()
-        return keyData;
-    } catch (error) {
-        console.log('key error', error)
-    }
-}
-
 const callWeather = async (localData) => {
-    const startDate = document.getElementById('departure').value;
-    const endDate = document.getElementById('returnDate').value;
     const lat = localData.latitude;
     const long = localData.longitude;
     const key = await fetch('http://localhost:8081/getKeys');
-    const keyData = key.json();
-
-    const apiUrl = `https://api.weatherbit.io/v2.0/history/daily?lat=${lat}&lon=${long}&start_date=${startDate}&end_date=${endDate}&key=`;
+    const keyData = await key.json();
+    const apiKey = keyData.weatherKey;
+    const apiUrl = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&units=I&key=${apiKey}`;
     
-    console.log(keyData)
-    // const response = await fetch(apiUrl);
-    // try {
-    //     const newData = response.json();
-    //     console.log(newData)
-    // } catch (error) {
-    //     console.log('error from Weatherbit', error);
-    // }
+    console.log(apiUrl)
+    const response = await fetch(apiUrl);
+    try {
+        const newData = response.json();
+        // console.log(newData)
+        return newData;
+    } catch (error) {
+        console.log('error from Weatherbit', error);
+    }
+};
+
+const postWeather = async (newData = {})=>{
+    const response = await fetch('http://localhost:8081/saveWeather', {
+    method: 'POST', 
+    credentials: 'same-origin', 
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    },
+    body: JSON.stringify(newData),        
+  });
+
+    try {
+      const wData = await response.json();
+      return wData
+    }catch(error) {
+    console.log("error", error);
+    }
+};
+
+const getPix = async (location) => {
+    const key = await fetch('http://localhost:8081/getKeys');
+    const keyData = await key.json();
+    const picKey = keyData.pixKey;
+    const pixUrl = `https://pixabay.com/api/?key=${picKey}&q=${encodeURIComponent(location)}&image_type=photo&per_page=3`;
+    console.log(pixUrl);
+
+    const response = await fetch(pixUrl);
+    try {
+        const pixData = response.json();
+        return pixData;
+    } catch (error) {
+        console.log('error from Pixabay', error);
+    }
+};
+
+const postPix = async (pixData = {})=>{
+    const response = await fetch('http://localhost:8081/savePic', {
+    method: 'POST', 
+    credentials: 'same-origin', 
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    },
+    body: JSON.stringify(pixData),        
+  });
+
+    try {
+      const pData = await response.json();
+      return pData
+    }catch(error) {
+    console.log("error", error);
+    }
 };
 
 export { getInfo }
