@@ -14,8 +14,8 @@
         <div class="column">
             <div class="row1">
                 <h1>Travel Planner</h1>
-                <div class="container">
-                    <div class="inputs">
+                <div class="pre-container">
+                    <div class="inputs" id="inputs">
                         <h4>Enter Destination</h4>
                         <input type="text" id="location">
                         <p id="latitude"></p>
@@ -31,7 +31,49 @@
             </div>
             <div class="row2">
                 <div class="results">
-                    <p id="destPic"></p>
+                    <img src="" alt="location_picture" class="inactive" id="localPic">
+                    <div class="off" id="forecast">
+                        <table id="week1">
+                            <tr>
+                                <th id="day1"></th>
+                                <th id="day2"></th>
+                                <th id="day3"></th>
+                                <th id="day4"></th>
+                                <th id="day5"></th>
+                                <th id="day6"></th>
+                                <th id="day7"></th>
+                            </tr>
+                            <tr>
+                                <td><i id="icon1"></i></td>
+                                <td><i id="icon2"></i></td>
+                                <td><i id="icon3"></i></td>
+                                <td><i id="icon4"></i></td>
+                                <td><i id="icon5"></i></td>
+                                <td><i id="icon6"></i></td>
+                                <td><i id="icon7"></i></td> 
+                            </tr>
+                        </table>
+                        <table id="week2">
+                            <tr>
+                                <th id="day8"></th>
+                                <th id="day9"></th>
+                                <th id="day10"></th>
+                                <th id="day11"></th>
+                                <th id="day12"></th>
+                                <th id="day13"></th>
+                                <th id="day14"></th>
+                            </tr>
+                            <tr>
+                                <td><i id="icon8"></i></td>
+                                <td><i id="icon9"></i></td>
+                                <td><i id="icon10"></i></td>
+                                <td><i id="icon11"></i></td>
+                                <td><i id="icon12"></i></td>
+                                <td><i id="icon13"></i></td>
+                                <td><i id="icon14"></i></td> 
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

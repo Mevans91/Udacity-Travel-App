@@ -66,3 +66,29 @@ footer{
     width: 20vw;
     margin-left: 5%;
 }
+
+.pre-container{
+    border: 1px solid black;
+    box-shadow: 0px 3px 19px #00000041;
+    height: 60vh;
+    width: 30vw;
+    margin-left: 25%;
+    margin-top: 5%;
+    background-color: white;
+};
+
+.inactive{
+   display: none;
+};
+
+.activated{
+    width: 350px;
+    height: 200px;
+    margin-left: 10%;
+    margin-top: 5%;
+    box-shadow: 0px 3px 19px #00000041;
+};
+
+table, th, td {
+    border: 1px solid black;
+  }

@@ -37,11 +37,12 @@ async function getData() {
                 });
                 getPix(location)
                 .then(function(pixData) {
-                    console.log(pixData.hits[0])
+                    // console.log(pixData.hits[0])
                     postPix({
                         picture: pixData.hits[0]
                     });
-                })
+                });
+                updateUI();
             })
         })
     });
@@ -75,18 +76,6 @@ const postData = async (data = {})=>{
       return newData
     }catch(error) {
     console.log("error", error);
-    }
-};
-
-const updateUI = async (url = 'http://localhost:8081/addGeo') => {
-    const request = await fetch(url);
-    try {
-       const allData= await request.json();
-    //    console.log(allData);
-       document.getElementById('latitude').innerHTML = allData.latitude;
-       document.getElementById('longitude').innerHTML = allData.longitude;
-    } catch (error) {
-       console.log("error", error);
     }
 };
 
@@ -148,6 +137,7 @@ const getPix = async (location) => {
     const response = await fetch(pixUrl);
     try {
         const pixData = response.json();
+        // console.log(pixData);
         return pixData;
     } catch (error) {
         console.log('error from Pixabay', error);
@@ -171,6 +161,71 @@ const postPix = async (pixData = {})=>{
     }catch(error) {
     console.log("error", error);
     }
+};
+
+async function updateUI() {
+    const picReq = await fetch('http://localhost:8081/getPic');
+    const picData = await picReq.json();
+    
+    addForecast();
+    // document.getElementById('localPic').setAttribute('src', picData.picture.webformatURL);
+    // document.getElementById('localPic').setAttribute('class', 'activated');
+    
+};
+
+const addForecast = async (url = 'http://localhost:8081/getWeather') => {
+    const weatherReq = await fetch(url);
+    const weatherData = await weatherReq.json();
+    const day1 = weatherData.day1.datetime;
+    const day2 = weatherData.day2.datetime;
+    const day3 = weatherData.day3.datetime;
+    const day4 = weatherData.day4.datetime;
+    const day5 = weatherData.day5.datetime;
+    const day6 = weatherData.day6.datetime;
+    const day7 = weatherData.day7.datetime;
+    const day8 = weatherData.day8.datetime;
+    const day9 = weatherData.day9.datetime;
+    const day10 = weatherData.day10.datetime;
+    const day11 = weatherData.day11.datetime;
+    const day12 = weatherData.day12.datetime;
+    const day13 = weatherData.day13.datetime;
+    const day14 = weatherData.day14.datetime;
+    const now = new Date();
+    let days = [day1, day2, day3, day4, day5, day6, day7, 
+        day8, day9, day10, day11, day12, day13, day14
+    ];
+    let weather = [weatherData.day1.weather.description, 
+        weatherData.day2.weather.description, weatherData.day3.weather.description, 
+        weatherData.day4.weather.description, weatherData.day5.weather.description,
+        weatherData.day6.weather.description, weatherData.day7.weather.description,
+        weatherData.day8.weather.description, weatherData.day9.weather.description,
+        weatherData.day10.weather.description, weatherData.day11.weather.description,
+        weatherData.day12.weather.description, weatherData.day13.weather.description,
+        weatherData.day14.weather.description
+    ];
+    console.log(weather);
+
+    for (let x = 0; x < 14; x++){
+        let d = new Date(days[x]);
+        console.log(d);
+        document.getElementById(`day${x+1}`).innerHTML = d.toString().split(' ')[0];
+        if( weather[x] === "Overcast clouds") {
+            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud');
+        } else if (weather[x] === "Scattered clouds" || "Broken clouds" || "Few clouds") {
+            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-sun');
+        } else if (weather[x] === "Heavy rain") {
+            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-showers-heavy');
+        } else if (weather[x] === "Light rain" || "Mix snow/rain") {
+            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain');
+        } else if (weather[x] === "Light snow" || "Heavy snow") {
+            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-snowflake');
+        } else if(weather[x] === "Clear Sky") {
+            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-sun');
+        } else {
+            console.log('error: no icon');
+        }
+        
+    };
 };
 
 export { getInfo }
