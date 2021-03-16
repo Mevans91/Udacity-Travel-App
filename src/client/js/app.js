@@ -2,6 +2,7 @@
 
 function getInfo(event) {
     getData();
+    addCountdown();
 }
 
 async function getData() {
@@ -37,7 +38,6 @@ async function getData() {
                 });
                 getPix(location)
                 .then(function(pixData) {
-                    // console.log(pixData.hits[0])
                     postPix({
                         picture: pixData.hits[0]
                     });
@@ -167,9 +167,11 @@ async function updateUI() {
     const picReq = await fetch('http://localhost:8081/getPic');
     const picData = await picReq.json();
     
+    console.log(picData.picture.webformatURL);
     addForecast();
-    // document.getElementById('localPic').setAttribute('src', picData.picture.webformatURL);
-    // document.getElementById('localPic').setAttribute('class', 'activated');
+    document.getElementById('localPic').setAttribute('src', picData.picture.webformatURL);
+    document.getElementById('localPic').setAttribute('class', 'activated');
+    document.getElementById('forecast').setAttribute('class', 'tableOn');
     
 };
 
@@ -208,24 +210,82 @@ const addForecast = async (url = 'http://localhost:8081/getWeather') => {
     for (let x = 0; x < 14; x++){
         let d = new Date(days[x]);
         console.log(d);
-        document.getElementById(`day${x+1}`).innerHTML = d.toString().split(' ')[0];
-        if( weather[x] === "Overcast clouds") {
-            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud');
-        } else if (weather[x] === "Scattered clouds" || "Broken clouds" || "Few clouds") {
-            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-sun');
-        } else if (weather[x] === "Heavy rain") {
-            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-showers-heavy');
-        } else if (weather[x] === "Light rain" || "Mix snow/rain") {
-            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain');
-        } else if (weather[x] === "Light snow" || "Heavy snow") {
-            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-snowflake');
-        } else if(weather[x] === "Clear Sky") {
-            document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-sun');
-        } else {
-            console.log('error: no icon');
-        }
+        document.getElementById(`day${x+1}`).innerHTML = d.toString().split(' ')[0]+' '+d.getDate();
+        
+        let description = weather[x];
+
+        switch(description) {
+            case "Overcast clouds":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud');
+                break;
+            case "Scattered clouds":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-sun');
+                break;
+            case "Broken clouds":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-sun');
+                break;
+            case "Few clouds":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-sun');
+                break;
+            case "Heavy rain":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-showers-heavy');
+                break;
+            case "Light shower rain":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain');
+                break;
+            case "Light rain":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain');
+                break;
+            case "Moderate rain":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain');
+                break;
+            case "Mix snow/rain":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain');
+                break;
+            case "Light snow":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-snowflake');
+                break;
+            case "Heavy snow":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-snowflake');
+                break;
+            case "Clear Sky":
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-sun');
+                break;
+            default:
+                console.log('error: no icon');
+        };
         
     };
+};
+
+function addCountdown(){
+
+    const departure = document.getElementById('departure').value;
+    const countDownDate = new Date(departure).getTime();
+    
+    // Update the count down every 1 second
+    const x = setInterval(function() {
+        const now = new Date().getTime();
+      
+        // Find the distance between now and the count down date
+        const distance = countDownDate - now;
+      
+        // Time calculations for days, hours, minutes and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+        // Display the result in the element with id="demo"
+        document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+      
+        // If the count down is finished, write some text
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("demo").innerHTML = "EXPIRED";
+        }
+    }, 1000);
 };
 
 export { getInfo }
