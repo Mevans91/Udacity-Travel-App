@@ -6,32 +6,32 @@ const express = require('express');
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { Geonames } = require('geonames.js')
 
 
 const app = express()
 
-app.use(express.static('dist'))
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(cors())
+app.use(express.static('dist'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 
 let geoData = {};
 let apiKeys = {
     weatherKey: process.env.WEATHER_KEY,
-    pixKey: process.env.PIXABAY_KEY
+    pixKey: process.env.PIXABAY_KEY,
+    geoKey: process.env.GEO_USERNAME
 };
 let weatherData = {};
 let pixData = {};
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
-})
+});
 
 // designates what port the app will listen to for incoming requests
 app.listen(8081, function () {
     console.log('Example app listening on port 8081!');
-})
+});
 
 app.get('/getKeys', function(request, response){
     response.send(apiKeys);
@@ -75,7 +75,6 @@ app.post('/savePic', function(request, response) {
     pixData = {
         picture: request.body.picture
     };
-    console.log(pixData);
 });
 
 app.get('/getPic', function(request, response) {

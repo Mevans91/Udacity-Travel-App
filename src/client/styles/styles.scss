@@ -10,20 +10,21 @@ body{
 .row1{
     height: 85vh;
     width: 60vw;
-}
+};
 
 .row2{
     height: 85vh;
     width: 40vw;
-}
+};
+
 .column{
     display: flex;
-}
+};
 
 nav{
     height: 50px;
     background-color: rgb(48, 36, 206);
-}
+};
 
 .topTitle{
     margin-left: 45%;
@@ -59,7 +60,6 @@ footer{
 }
 
 .inputs{
-    // border: 1px solid black;
     width: 100%;
     margin-left: 5%;
 }
@@ -127,8 +127,7 @@ table, th, td {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: large;
     text-align: center;
-    margin-right: 10%;
-    
+    margin-right: 10%; 
 };
 
 #location{
@@ -169,35 +168,6 @@ table, th, td {
 };
 
 @media screen and (min-width: 1800px){
-    body{
-        background-color: aliceblue;
-    }
-
-    .rowA{
-        height: 85vh;
-        width: 100vw;
-    };
-    
-    .row1{
-        height: 85vh;
-        width: 60vw;
-        // border: 1px solid black;
-    }
-    
-    .row2{
-        height: 85vh;
-        width: 40vw;
-        // border: 1px solid black;
-    }
-    .column{
-        display: flex;
-    }
-    
-    nav{
-        height: 50px;
-        background-color: rgb(48, 36, 206);
-    }
-    
     .topTitle{
         margin-left: 42.5%;
     };
@@ -207,60 +177,13 @@ table, th, td {
         width: 100%;
     };
     
-    footer{
-        background-color:  rgb(48, 36, 206);
-        width: 100%;
-        height: 50px;
-        text-align: center;
-        margin-bottom: 0%;
-    }
-    
-    #plane{
-        color: crimson;
-    }
-    
-    #copyright{
-       margin-top: 0%;
-    };
-    
     .results{
         border: 1px solid black;
         box-shadow: 0px 3px 19px #00000041;
         height: 60vh;
         width: 30vw;
-        // margin-left: 12.5%;
         margin-top: 15%;
         background-color: white;
-    }
-    
-    .inputs{
-        // border: 1px solid black;
-        width: 100%;
-        margin-left: 5%;
-    }
-    
-    #pre-container{
-        border: 1px solid black;
-        box-shadow: 0px 3px 19px #00000041;
-        height: 60vh;
-        width: 65vw;
-        margin-left: 17.5%;
-        margin-top: 5%;
-        background-color: white;
-    };
-
-    #post-container{
-        border: 1px solid black;
-        box-shadow: 0px 3px 19px #00000041;
-        height: 60vh;
-        width: 30vw;
-        margin-left: 25%;
-        margin-top: 5%;
-        background-color: white;
-    };
-    
-    .inactive{
-       display: none;
     };
     
     .activated{
@@ -271,18 +194,9 @@ table, th, td {
         box-shadow: 0px 3px 19px #00000041;
     };
     
-    table, th, td {
-        border: 1px solid black;
-    }
-    
     .tableOn {
         margin-left: 13%;
         margin-top: 10%;
-    };
-
-    .forGreeting{
-        margin-top: 20%;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     };
 
     #countdown{
@@ -315,7 +229,7 @@ table, th, td {
     };
 
     .title{
-        margin-left: 36.5%;
+        margin-left: 36%;
         font-size: x-large;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     };
@@ -326,46 +240,9 @@ table, th, td {
         font-size: x-large;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     };
+};
 
-    .weatherCharts{
-        box-shadow: 0px 3px 19px #00000041;
-    };
-
-    .icon{
-        margin-left: 30%;
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    body{
-        background-color: aliceblue;
-    }
-
-    .rowA{
-        height: 85vh;
-        width: 100vw;
-    };
-    
-    .row1{
-        height: 85vh;
-        width: 60vw;
-        // border: 1px solid black;
-    }
-    
-    .row2{
-        height: 85vh;
-        width: 40vw;
-        // border: 1px solid black;
-    }
-    .column{
-        display: flex;
-    }
-    
-    nav{
-        height: 50px;
-        background-color: rgb(48, 36, 206);
-    }
-    
+@media screen and (max-width: 1024px) and (min-width: 401px) {    
     .topTitle{
         margin-left: 35%;
     };
@@ -375,45 +252,12 @@ table, th, td {
         width: 100%;
     };
     
-    footer{
-        background-color:  rgb(48, 36, 206);
-        width: 100%;
-        height: 50px;
-        text-align: center;
-        margin-bottom: 0%;
-    }
-    
-    #plane{
-        color: crimson;
-    }
-    
-    #copyright{
-       margin-top: 0%;
-    };
-    
     .results{
         border: 1px solid black;
         box-shadow: 0px 3px 19px #00000041;
         height: 60vh;
         width: 35vw;
-        // margin-left: 12.5%;
         margin-top: 22%;
-        background-color: white;
-    }
-    
-    .inputs{
-        // border: 1px solid black;
-        width: 100%;
-        margin-left: 5%;
-    }
-    
-    #pre-container{
-        border: 1px solid black;
-        box-shadow: 0px 3px 19px #00000041;
-        height: 60vh;
-        width: 65vw;
-        margin-left: 17.5%;
-        margin-top: 5%;
         background-color: white;
     };
 
@@ -427,10 +271,6 @@ table, th, td {
         background-color: white;
     };
     
-    .inactive{
-       display: none;
-    };
-    
     .activated{
         width: 350px;
         height: 200px;
@@ -438,10 +278,6 @@ table, th, td {
         margin-top: 5%;
         box-shadow: 0px 3px 19px #00000041;
     };
-    
-    table, th, td {
-        border: 1px solid black;
-    }
     
     .tableOn {
         margin-left: 13%;
@@ -505,68 +341,15 @@ table, th, td {
 
     };
 
-    .icon{
-        margin-left: 30%;
-    };
-
     #localPic{
         width: 80%;
         margin-left: 10%;
-    }
-}
-
-@media screen and (min-width: 400px) {
-    body{
-        background-color: aliceblue;
-    }
-
-    .rowA{
-        height: 85vh;
-        width: 100vw;
     };
-    
-    .row1{
-        height: 85vh;
-        width: 60vw;
-        // border: 1px solid black;
-    }
-    
-    .row2{
-        height: 85vh;
-        width: 40vw;
-        // border: 1px solid black;
-    }
-    .column{
-        display: flex;
-    }
-    
-    nav{
-        height: 3vh;
-        background-color: rgb(48, 36, 206);
-    }
-    
+};
+
+@media screen and (max-width: 400px) {
     .topTitle{
         margin-left: 35%;
-    };
-    
-    .topTitle2{
-        margin-left: 72%;
-    };
-    
-    footer{
-        background-color:  rgb(48, 36, 206);
-        width: 100%;
-        height: 50px;
-        text-align: center;
-        margin-bottom: 0%;
-    }
-    
-    #plane{
-        color: crimson;
-    }
-    
-    #copyright{
-       margin-top: 0%;
     };
     
     .results{
@@ -574,39 +357,18 @@ table, th, td {
         box-shadow: 0px 3px 19px #00000041;
         height: 60vh;
         width: 30vw;
-        // margin-left: 12.5%;
         margin-top: 16.5%;
         background-color: white;
-    }
-    
-    .inputs{
-        // border: 1px solid black;
-        width: 100%;
-        margin-left: 5%;
-    }
+    };
     
     #pre-container{
         border: 1px solid black;
         box-shadow: 0px 3px 19px #00000041;
-        height: 60vh;
+        height: 80vh;
         width: 65vw;
         margin-left: 16%;
         margin-top: 5%;
         background-color: white;
-    };
-
-    #post-container{
-        // border: 1px solid black;
-        box-shadow: 0px 3px 19px #00000041;
-        height: 60vh;
-        width: 30vw;
-        margin-left: 25%;
-        margin-top: 5%;
-        background-color: white;
-    };
-    
-    .inactive{
-       display: none;
     };
     
     .activated{
@@ -617,18 +379,9 @@ table, th, td {
         box-shadow: 0px 3px 19px #00000041;
     };
     
-    table, th, td {
-        border: 1px solid black;
-    }
-    
     .tableOn {
         margin-left: 13%;
         margin-top: 10%;
-    };
-
-    .forGreeting{
-        margin-top: 20%;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     };
 
     #countdown{
@@ -672,11 +425,4 @@ table, th, td {
         font-size: x-large;
     };
 
-    .weatherCharts{
-        box-shadow: 0px 3px 19px #00000041;
-    };
-
-    .icon{
-        margin-left: 30%;
-    }
-}
+};

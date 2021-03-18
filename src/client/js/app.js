@@ -5,10 +5,9 @@ function getInfo(event) {
 
 async function getData() {
     const location = document.getElementById('location').value;
-    const apiUrl = `http://api.geonames.org/searchJSON?q=${location}&maxRows=1&username=Mevans91`;
 
     console.log(location);
-    getGeoData(apiUrl)
+    getGeoData(location)
     .then(function(data) {
         postData({
             latitude: data.geonames[0].lat,
@@ -46,9 +45,13 @@ async function getData() {
     });
 };
 
-async function getGeoData(apiUrl) {
+async function getGeoData(location) {
+    const key = await fetch('http://localhost:8081/getKeys');
+    const keyData = await key.json();
+    const geoKey = keyData.geoKey;
+    const apiUrl = `http://api.geonames.org/searchJSON?q=${location}&maxRows=1&username=${geoKey}`;
     const response = await fetch(apiUrl);
-    console.log(apiUrl);
+
     try {
         const data = response.json();
         return data;
@@ -93,12 +96,10 @@ const callWeather = async (localData) => {
     const keyData = await key.json();
     const apiKey = keyData.weatherKey;
     const apiUrl = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&units=I&key=${apiKey}`;
-    
-    console.log(apiUrl)
     const response = await fetch(apiUrl);
+
     try {
         const newData = response.json();
-        // console.log(newData)
         return newData;
     } catch (error) {
         console.log('error from Weatherbit', error);
@@ -119,8 +120,8 @@ const postWeather = async (newData = {})=>{
     try {
       const wData = await response.json();
       return wData
-    }catch(error) {
-    console.log("error", error);
+    } catch(error) {
+        console.log("error", error);
     }
 };
 
@@ -129,12 +130,10 @@ const getPix = async (location) => {
     const keyData = await key.json();
     const picKey = keyData.pixKey;
     const pixUrl = `https://pixabay.com/api/?key=${picKey}&q=${encodeURIComponent(location)}&image_type=photo&per_page=3`;
-    console.log(pixUrl);
 
     const response = await fetch(pixUrl);
     try {
         const pixData = response.json();
-        // console.log(pixData);
         return pixData;
     } catch (error) {
         console.log('error from Pixabay', error);
@@ -268,10 +267,8 @@ const addForecast = async (url = 'http://localhost:8081/getWeather') => {
 };
 
 function addCountdown(){
-
     const departure = document.getElementById('departure').value;
     const countDownDate = new Date(departure).getTime();
-    
     
     // Updates the count down every 1 second
     const x = setInterval(function() {
