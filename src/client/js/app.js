@@ -297,4 +297,7 @@ function addCountdown(){
     }, 1000);
 };
 
-export { getInfo }
+function addButtonFunction (){
+    document.getElementById('submission').addEventListener('click', getInfo);
+};
+export { getInfo, addButtonFunction }

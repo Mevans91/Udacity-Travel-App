@@ -1,12 +1,13 @@
 import "./styles/styles.scss";
-import { getInfo } from './js/app';
+import { getInfo, addButtonFunction } from './js/app';
 
 
 export {
-    getInfo
+    getInfo,
+    addButtonFunction
 }
 
-document.getElementById('submission').addEventListener('click', getInfo);
+addButtonFunction();
 
 
 
