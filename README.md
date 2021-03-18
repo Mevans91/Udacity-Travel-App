@@ -14,3 +14,5 @@ From a list Udacity provided, I chose to use two items from the list to make my 
 out. I chose to forecast multiple days, displaying two weeks ahead, and also I chose to add 
 icons to the forecast. Weather icons from the FontAwesome library are used to represent
 their appropriate weather conditions.
+
+Api keys are temporarily in the code for submission purposes, but will be hidden again later.

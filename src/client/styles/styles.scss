@@ -27,11 +27,13 @@ nav{
 };
 
 .topTitle{
-    margin-left: 45%;
+    margin-left: 40%;
+    width: 100%;
 };
 
 .topTitle2{
-    margin-left: 72%;
+    margin-left: 70%;
+    width: 100%;
 }
 
 footer{
@@ -165,81 +167,6 @@ table, th, td {
     margin-top: 5%;
     margin-left: 3%;
 
-};
-
-@media screen and (min-width: 1800px){
-    .topTitle{
-        margin-left: 42.5%;
-    };
-    
-    .topTitle2{
-        margin-left: 70%;
-        width: 100%;
-    };
-    
-    .results{
-        border: 1px solid black;
-        box-shadow: 0px 3px 19px #00000041;
-        height: 60vh;
-        width: 30vw;
-        margin-top: 15%;
-        background-color: white;
-    };
-    
-    .activated{
-        width: 350px;
-        height: 200px;
-        margin-left: 15%;
-        margin-top: 5%;
-        box-shadow: 0px 3px 19px #00000041;
-    };
-    
-    .tableOn {
-        margin-left: 13%;
-        margin-top: 10%;
-    };
-
-    #countdown{
-        font-size: 40pt;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        font-weight: bold;
-        margin-left: 20%;
-    };
-
-    #onWay1{
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        font-size: xx-large;
-        margin-left: 5%;
-    };
-
-    #instructions{
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        font-size: large;
-        text-align: center;
-    };
-
-    #location{
-        font-size: x-large;
-        margin-left: 32.5%;
-    };
-
-    #departure{
-        font-size: x-large;
-        margin-left: 36%;
-    };
-
-    .title{
-        margin-left: 36%;
-        font-size: x-large;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    };
-
-    #submission{
-        margin-top: 5%;
-        margin-left: 39%;
-        font-size: x-large;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    };
 };
 
 @media screen and (max-width: 1024px) and (min-width: 401px) {    
