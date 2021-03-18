@@ -1,5 +1,3 @@
-
-
 function getInfo(event) {
     getData();
     addCountdown();
@@ -41,12 +39,11 @@ async function getData() {
                     postPix({
                         picture: pixData.hits[0]
                     });
+                    updateUI(location);
                 });
-                updateUI();
-            })
-        })
+            });
+        });    
     });
-
 };
 
 async function getGeoData(apiUrl) {
@@ -163,15 +160,25 @@ const postPix = async (pixData = {})=>{
     }
 };
 
-async function updateUI() {
+//updateUI pushes data to the html view and switches classes on certain elements to activate sections or hide unnecessary ones
+async function updateUI(location) {
     const picReq = await fetch('http://localhost:8081/getPic');
     const picData = await picReq.json();
-    
-    console.log(picData.picture.webformatURL);
+
     addForecast();
     document.getElementById('localPic').setAttribute('src', picData.picture.webformatURL);
     document.getElementById('localPic').setAttribute('class', 'activated');
     document.getElementById('forecast').setAttribute('class', 'tableOn');
+    document.getElementById('message').setAttribute('class', 'forGreeting');
+    document.getElementById('onWay1').innerHTML = `You'll be on your way to ${location} in`;
+    document.getElementById('pre-container').setAttribute('class', 'inactive');
+    document.getElementById('post-container').setAttribute('class', 'post-container');
+    document.getElementById('resultSquare').setAttribute('class', 'results');
+    document.getElementById('planner').setAttribute('class', 'topTitle2');
+    document.getElementById('row2').setAttribute('class', 'row2');
+    document.getElementById('row1').setAttribute('class', 'row1');
+    document.getElementById('planner').setAttribute('class', 'topTitle2');
+    
     
 };
 
@@ -214,42 +221,44 @@ const addForecast = async (url = 'http://localhost:8081/getWeather') => {
         
         let description = weather[x];
 
+        //This function cycles through all possible weather conditions and assigns appropriate icons to represent them
+
         switch(description) {
             case "Overcast clouds":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud icon');
                 break;
             case "Scattered clouds":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-sun');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-sun icon');
                 break;
             case "Broken clouds":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-sun');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-sun icon');
                 break;
             case "Few clouds":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-sun');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-sun icon');
                 break;
             case "Heavy rain":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-showers-heavy');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-showers-heavy icon');
                 break;
             case "Light shower rain":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain icon');
                 break;
             case "Light rain":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain icon');
                 break;
             case "Moderate rain":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain icon');
                 break;
             case "Mix snow/rain":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-cloud-rain icon');
                 break;
             case "Light snow":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-snowflake');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-snowflake icon');
                 break;
             case "Heavy snow":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-snowflake');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-snowflake icon');
                 break;
             case "Clear Sky":
-                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-sun');
+                document.getElementById(`icon${x+1}`).setAttribute('class', 'fas fa-sun icon');
                 break;
             default:
                 console.log('error: no icon');
@@ -263,12 +272,16 @@ function addCountdown(){
     const departure = document.getElementById('departure').value;
     const countDownDate = new Date(departure).getTime();
     
-    // Update the count down every 1 second
+    
+    // Updates the count down every 1 second
     const x = setInterval(function() {
         const now = new Date().getTime();
-      
+        const date = new Date();
+        const localOffset = (-1) * date.getTimezoneOffset() * 60000;
+        //localOffset adjusts UTC time to CMT time
+
         // Find the distance between now and the count down date
-        const distance = countDownDate - now;
+        const distance = (countDownDate - now) - localOffset;
       
         // Time calculations for days, hours, minutes and seconds
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -276,14 +289,13 @@ function addCountdown(){
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
       
-        // Display the result in the element with id="demo"
-        document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s ";
+        document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s";
       
         // If the count down is finished, write some text
         if (distance < 0) {
           clearInterval(x);
-          document.getElementById("demo").innerHTML = "EXPIRED";
+          document.getElementById("countdown").innerHTML = "IT'S TIME!";
         }
     }, 1000);
 };

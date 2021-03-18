@@ -12,28 +12,29 @@
             </nav>
         </header>
         <div class="column">
-            <div class="row1">
-                <h1>Travel Planner</h1>
-                <div class="pre-container">
+            <div class="rowA" id="row1">
+                <h1 class="topTitle" id="planner">Forecast Travel Planner</h1>
+                <div class="on" id="pre-container">
                     <div class="inputs" id="inputs">
-                        <h4>Enter Destination</h4>
+                        <p id="instructions">To help you plan an upcoming trip, enter you destination and departure date below.</p>
+                        <h4 class="title">Enter Destination</h4>
                         <input type="text" id="location">
-                        <p id="latitude"></p>
-                        <p id="longitude"></p>
-                        <h4>Departure Date</h4>
+                        <h4 class="title">Departure Date</h4>
                         <input type="date" id="departure">
-                        
+                        <br>
                         <button type="submit" id="submission">Submit</button>
-                        <p id="demo"></p>
                     </div>
                 </div>
-                
+                <div class="inactive" id="post-container">
+                    <p id="onWay1"></p>
+                    <p id="countdown"></p>
+                </div>
             </div>
-            <div class="row2">
-                <div class="results">
+            <div class="inactive" id="row2">
+                <div class="inactive" id="resultSquare">
                     <img src="" alt="location_picture" class="inactive" id="localPic">
                     <div class="inactive" id="forecast">
-                        <table id="week1">
+                        <table class="weatherCharts" id="week1">
                             <tr>
                                 <th id="day1"></th>
                                 <th id="day2"></th>
@@ -53,7 +54,7 @@
                                 <td><i id="icon7"></i></td> 
                             </tr>
                         </table>
-                        <table id="week2">
+                        <table class="weatherCharts" id="week2">
                             <tr>
                                 <th id="day8"></th>
                                 <th id="day9"></th>
@@ -73,14 +74,15 @@
                                 <td><i id="icon14"></i></td> 
                             </tr>
                         </table>
+                        <h2 class="inactive" id="message">Here's your two week forecast! <br> Have a nice trip!</h2>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="footer fixed-bottom">
+        <footer class="footer">
             <div class="footer-row">
                 <div class="col-12">
-                    <p id="copyright">Copyright 2021 Travel App</p>
+                    <p id="copyright">Copyright 2021 ME's Travel App</p>
                 </div>
             </div>
           </footer>
