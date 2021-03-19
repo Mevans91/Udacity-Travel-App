@@ -46,10 +46,6 @@ async function getData() {
 };
 
 async function getGeoData(location) {
-    // const key = await fetch('http://localhost:8081/getKeys');
-    // const keyData = await key.json();
-     // apikey is public for submission purposes, normally the fetch call above would get the keys and keep them secure
-
     const geoKey = 'Mevans91';
     const apiUrl = `http://api.geonames.org/searchJSON?q=${location}&maxRows=1&username=${geoKey}`;
     const response = await fetch(apiUrl);
@@ -94,9 +90,6 @@ const getCoordinates = async (url = 'http://localhost:8081/addGeo') => {
 const callWeather = async (localData) => {
     const lat = localData.latitude;
     const long = localData.longitude;
-    // const key = await fetch('http://localhost:8081/getKeys');
-    // const keyData = await key.json();
-    // apikey is public for submission purposes, normally the fetch call above would get the keys and keep them secure
     const apiKey = '31906ff0fac54d5e863adbc146f6da71';
     const apiUrl = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&units=I&key=${apiKey}`;
     const response = await fetch(apiUrl);
@@ -129,9 +122,6 @@ const postWeather = async (newData = {})=>{
 };
 
 const getPix = async (location) => {
-    // const key = await fetch('http://localhost:8081/getKeys');
-    // const keyData = await key.json();
-    // apikey is public for submission purposes, normally the fetch call above would get the keys and keep them secure
     const picKey = '20375948-3b9ccc2d78e6a17d1a7bb3c71';
     const pixUrl = `https://pixabay.com/api/?key=${picKey}&q=${encodeURIComponent(location)}&image_type=photo&per_page=3`;
 
