@@ -15,14 +15,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-let geoData = {};
-let apiKeys = {
-    weatherKey: process.env.WEATHER_KEY,
-    pixKey: process.env.PIXABAY_KEY,
-    geoKey: process.env.GEO_USERNAME
+let projectData = {
+    geoData: {},
+    weatherData: {},
+    pixData: {},
+    apiKeys: {
+        weatherKey: process.env.WEATHER_KEY,
+        pixKey: process.env.PIXABAY_KEY,
+        geoKey: process.env.GEO_USERNAME
+    }
 };
-let weatherData = {};
-let pixData = {};
+
+// let geoData = {};
+// let apiKeys = {
+//     weatherKey: process.env.WEATHER_KEY,
+//     pixKey: process.env.PIXABAY_KEY,
+//     geoKey: process.env.GEO_USERNAME
+// };
+// let weatherData = {};
+// let pixData = {};
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
@@ -34,22 +45,22 @@ app.listen(8081, function () {
 });
 
 app.get('/getKeys', function(request, response){
-    response.send(apiKeys);
+    response.send(projectData.apiKeys);
 });
 
 app.get('/addGeo', function(request, response){
-    response.send(geoData);
+    response.send(projectData.geoData);
 });
 
 app.post('/getGeo', function(request, response) {
-    geoData = {
+    projectData.geoData = {
         latitude: request.body.latitude,
         longitude: request.body.longitude
     };
 });
 
 app.post('/saveWeather', function(request, response) {
-    weatherData = {
+    projectData.weatherData = {
         day1: request.body.day1,
         day2: request.body.day2,
         day3: request.body.day3,
@@ -68,15 +79,15 @@ app.post('/saveWeather', function(request, response) {
 });
 
 app.get('/getWeather', function (request, response) {
-    response.send(weatherData);
+    response.send(projectData.weatherData);
 });
 
 app.post('/savePic', function(request, response) {
-    pixData = {
+    projectData.pixData = {
         picture: request.body.picture
     };
 });
 
 app.get('/getPic', function(request, response) {
-    response.send(pixData);
+    response.send(projectData.pixData);
 });

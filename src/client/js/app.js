@@ -168,8 +168,8 @@ async function updateUI(location) {
     document.getElementById('post-container').setAttribute('class', 'post-container');
     document.getElementById('resultSquare').setAttribute('class', 'results');
     document.getElementById('planner').setAttribute('class', 'topTitle2');
-    document.getElementById('row2').setAttribute('class', 'row2');
-    document.getElementById('row1').setAttribute('class', 'row1');
+    document.getElementById('col2').setAttribute('class', 'column2');
+    document.getElementById('col1').setAttribute('class', 'column1');
     document.getElementById('planner').setAttribute('class', 'topTitle2');
     
     
