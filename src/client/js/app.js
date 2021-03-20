@@ -1,12 +1,23 @@
+import 'regenerator-runtime/runtime';
+/** 
+ * regenerator-runtime had to be imported, as babel's polyfill has been depreciated.
+ */
+
+
 function getInfo(event) {
     getData();
     addCountdown();
 }
 
+/**
+ * getData is fairly straight forward, it goes through each API and pulls the necessary
+ * data. It then saves that data to the appropriate endpoints on the server side, until it
+ * gets down to the updateUI, where the endpoints are called and the html is updated with the 
+ * formatted data.
+ */
 async function getData() {
     const location = document.getElementById('location').value;
 
-    console.log(location);
     getGeoData(location)
     .then(function(data) {
         postData({

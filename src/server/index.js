@@ -7,7 +7,6 @@ const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-
 const app = express()
 
 app.use(express.static('dist'));
@@ -25,15 +24,6 @@ let projectData = {
         geoKey: process.env.GEO_USERNAME
     }
 };
-
-// let geoData = {};
-// let apiKeys = {
-//     weatherKey: process.env.WEATHER_KEY,
-//     pixKey: process.env.PIXABAY_KEY,
-//     geoKey: process.env.GEO_USERNAME
-// };
-// let weatherData = {};
-// let pixData = {};
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')

@@ -17,6 +17,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "geonames.js": "^3.0.3",
+    "regenerator-runtime": "^0.13.7",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
