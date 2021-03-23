@@ -57,7 +57,9 @@ async function getData() {
 };
 
 async function getGeoData(location) {
-    const geoKey = 'Mevans91';
+    const keysData = await fetch('http://localhost:8081/getKeys');
+    const keys = await keysData.json();
+    const geoKey = keys.geoKey;
     const apiUrl = `http://api.geonames.org/searchJSON?q=${location}&maxRows=1&username=${geoKey}`;
     const response = await fetch(apiUrl);
 
@@ -99,9 +101,11 @@ const getCoordinates = async (url = 'http://localhost:8081/addGeo') => {
 };
 
 const callWeather = async (localData) => {
+    const keysData = await fetch('http://localhost:8081/getKeys');
+    const keys = await keysData.json();
+    const apiKey = keys.weatherKey;
     const lat = localData.latitude;
     const long = localData.longitude;
-    const apiKey = '31906ff0fac54d5e863adbc146f6da71';
     const apiUrl = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&units=I&key=${apiKey}`;
     const response = await fetch(apiUrl);
 
@@ -133,7 +137,9 @@ const postWeather = async (newData = {})=>{
 };
 
 const getPix = async (location) => {
-    const picKey = '20375948-3b9ccc2d78e6a17d1a7bb3c71';
+    const keysData = await fetch('http://localhost:8081/getKeys');
+    const keys = await keysData.json();
+    const picKey = keys.pixKey;
     const pixUrl = `https://pixabay.com/api/?key=${picKey}&q=${encodeURIComponent(location)}&image_type=photo&per_page=3`;
 
     const response = await fetch(pixUrl);
